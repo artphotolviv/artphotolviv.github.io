@@ -57,12 +57,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden; }
 
-html.device-mobile-optimized {
-  overflow-x: hidden; }
+.SITE_ROOT {
+  min-height: 100%;
+  position: relative;
+  margin: 0 auto; }
+
+.POPUPS_ROOT {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: scroll;
+  position: fixed;
+  z-index: 50; }
+  .POPUPS_ROOT > div {
+    /* page */
+    margin: 0 auto; }
+
+html.device-mobile-optimized.device-android {
+  margin-bottom: 1px; }
+
+html.device-mobile-optimized.blockSiteScrolling > body {
+  position: fixed; }
 
 body.device-mobile-optimized {
   overflow-x: hidden;
-  overflow-y: scroll; }
+  overflow-y: auto; }
   body.device-mobile-optimized #SITE_CONTAINER {
     width: 320px;
     overflow-x: visible;
@@ -73,10 +94,6 @@ body.device-mobile-optimized {
   body.device-mobile-optimized .SITE_ROOT {
     overflow-x: hidden;
     overflow-y: hidden; }
-  body.device-mobile-optimized.disableSiteScroll {
-    overflow-y: hidden; }
-    body.device-mobile-optimized.disableSiteScroll.device-mobile {
-      position: fixed; }
 
 body.device-mobile-non-optimized #SITE_CONTAINER > :not(.mobile-non-optimized-overflow) .SITE_ROOT {
   overflow-x: hidden;
@@ -93,7 +110,8 @@ body.fullScreenMode {
   overflow-x: hidden !important;
   overflow-y: hidden !important; }
   body.fullScreenMode.device-mobile-optimized #TINY_MENU {
-    display: none; }
+    opacity: 0;
+    pointer-events: none; }
 
 body.fullScreenMode-scrollable.device-mobile-optimized {
   overflow-x: hidden !important;
@@ -106,28 +124,11 @@ body.fullScreenMode-scrollable.device-mobile-optimized {
   body.fullScreenMode-scrollable.device-mobile-optimized #SITE_BACKGROUND {
     height: auto !important; }
 
-.SITE_ROOT {
-  min-height: 100%;
-  position: relative;
-  margin: 0 auto; }
-
-.POPUPS_ROOT {
-  bottom: 0;
-  left: 0;
-  overflow: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 50; }
-  .POPUPS_ROOT > div {
-    /* page */
-    margin: 0 auto; }
-
 .fullScreenOverlay {
   z-index: 1000;
   position: fixed;
   left: 0;
-  top: 0;
+  top: -60px;
   right: 0;
   bottom: 0;
   display: -webkit-box;
@@ -141,10 +142,12 @@ body.fullScreenMode-scrollable.device-mobile-optimized {
     margin: 0 auto;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 60px;
     left: 0;
     bottom: 0;
-    overflow: hidden; }
+    overflow: hidden;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0); }
 
 body[contenteditable] {
   overflow-x: auto;
